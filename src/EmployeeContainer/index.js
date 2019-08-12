@@ -108,6 +108,19 @@ class EmployeeContainer extends Component {
 
             const editResponse = await editRequest.json();
 
+            const editedEmployeeArray = this.state.employees.map((employee) => {
+                if(employee._id === editResponse.data._id){
+                    employee = editResponse.data;
+                }
+                
+                return employee;
+            });
+
+            this.setState({
+                employees: editedEmployeeArray,
+                showEditModal: false
+            })
+
             console.log(editResponse, ' editResponse');
         } catch (err) {
             console.log(err, 'error closeAndEdit');
@@ -121,7 +134,7 @@ class EmployeeContainer extends Component {
             <div>
                 <CreateEmployee addEmployee={this.addEmployee}/>
                 <EmployeeList employees={this.state.employees} showModal={this.showModal}/>
-                {this.state.showEditModal ? <EditEmployee employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
+                {this.state.showEditModal ? <EditEmployee closeAndEdit={this.state.closeAndEdit} employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
             </div>
         )
     }

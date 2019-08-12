@@ -4,7 +4,7 @@ const EditEmployee = (props) => {
     return (
         <div>
             <h4>Edit Employee</h4>
-            <form>
+            <form onSubmit={props.closeAndEdit}>
                 <label>
                     Edit Name:
                     <input type="text" name="name" onChange={props.handleFormChange} value={props.employeeToEdit.name}/>
