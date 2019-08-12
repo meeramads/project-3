@@ -73,8 +73,13 @@ class EmployeeContainer extends Component {
         }
     }
 
-    handleFormChange = () => {
-
+    handleFormChange = (e) => {
+        this.setState({
+            employeeToEdit: {
+                ...this.state.employeeToEdit,
+                [e.target.name]: e.target.value
+            }
+        })
     }
 
     showModal = (employee) => {
@@ -85,13 +90,51 @@ class EmployeeContainer extends Component {
         })
     }
 
+    closeAndEdit = async (e) => {
+        e.preventDefault();
+        
+        try{
+            const editRequest = await fetch('http://localhost/9000/api/v1/employee/' + this.state.employeeToEdit._id, {
+                method: 'PUT',
+                body: JSON.stringify(this.state.employeeToEdit),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (editRequest.status !== 200){
+                throw Error('editRequest not working');
+            }
+
+            const editResponse = await editRequest.json();
+
+            const editedEmployeeArray = this.state.employees.map((employee) => {
+                if(employee._id === editResponse.data._id){
+                    employee = editResponse.data;
+                }
+                
+                return employee;
+            });
+
+            this.setState({
+                employees: editedEmployeeArray,
+                showEditModal: false
+            })
+
+            console.log(editResponse, ' editResponse');
+        } catch (err) {
+            console.log(err, 'error closeAndEdit');
+            return err;
+        }
+    }
+
     render(){
         console.log(this.state)
         return (
             <div>
                 <CreateEmployee addEmployee={this.addEmployee}/>
                 <EmployeeList employees={this.state.employees} showModal={this.showModal}/>
-                {this.state.showEditModal ? <EditEmployee employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
+                {this.state.showEditModal ? <EditEmployee closeAndEdit={this.state.closeAndEdit} employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
             </div>
         )
     }
