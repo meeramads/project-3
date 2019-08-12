@@ -6,10 +6,10 @@ const Employees = (props) => {
     const employeeList = props.employees.map((employee) => {
         return (
             <li key={employee._id}>
-                <span>{employee.name}</span>
-                <span>{employee.position}</span>
-                <span>{employee.department}</span>
-                <button>Delete</button>
+                <span>{employee.name}</span><br/>
+                <span>{employee.position}</span><br/>
+                <span>{employee.department}</span><br/>
+                <button onClick={props.deleteEmployee.bind(null, employee._id)}>Delete</button>
                 <button onClick={props.showModal.bind(null, employee)}>Edit</button>
             </li>
         )
