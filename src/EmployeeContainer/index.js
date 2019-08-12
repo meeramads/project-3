@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CreateEmploye from '../CreateEmployee'
+import CreateEmployee from '../CreateEmployee'
 
 class EmployeeContainer extends Component {
     constructor(){
@@ -13,6 +13,36 @@ class EmployeeContainer extends Component {
         this.getEmployees();
     }
 
+    addEmployee = async (employee, e) => {
+        e.preventDefault();
+        console.log(employee, e, ' inside of addEmployee');
+        
+        try{
+            const createEmployee = await fetch('http://localhost/9000/api/v1/employee', {
+                method: 'POST',
+                body: JSON.stringify(employee),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if(createEmployee.status !== 200){
+                throw Error('Resource not found');
+            }
+
+            const createEmployeeResponse = await createEmployee.json();
+
+            this.setState({
+                employees: [...this.state.employees, createEmployeeResponse.data]
+            })
+
+            console.log(createEmployeeResponse, ' createEmployeeResponse')
+        } catch (err) {
+            console.log(err, ' addEmployee');
+            return err;
+        }
+    }
+
     getEmployees = async () => {
         try{
             const responseGetEmployees = await fetch('localhost/9000/api/v1/employee');
@@ -22,7 +52,7 @@ class EmployeeContainer extends Component {
             }
 
             const employeesResponse = await responseGetEmployees.json();
-            console.log(employeesResponse, '_employeesResponse <')
+            console.log(employeesResponse, ' employeesResponse <');
 
             this.setState({
                 employees: [...employeesResponse, ' employeesResponse']
@@ -34,9 +64,10 @@ class EmployeeContainer extends Component {
     }
 
     render(){
+        console.log(this.state)
         return (
             <div>
-                <CreateEmploye/>
+                <CreateEmployee addEmployee={this.addEmployee}/>
             </div>
         )
     }

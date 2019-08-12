@@ -19,7 +19,7 @@ class CreateEmployee extends Component {
 
     render(){
         return (
-            <form>
+            <form onSubmit={this.props.addEmployee.bind(null, this.state)}>
                 <label htmlFor="name">Name:
                     <input type="text" name="name" onChange={this.updateEmployee} value={this.state.name}/>
                 </label>
@@ -29,7 +29,7 @@ class CreateEmployee extends Component {
                 </label>
 
                 <label htmlFor="birthDate">Birthdate:
-                    <input type="date" name="birthdate" onChange={this.updateEmployee}  value={this.state.birthDate}/>
+                    <input type="date" name="birthDate" onChange={this.updateEmployee}  value={this.state.birthDate}/>
                 </label>
 
                 <label htmlFor="department">Department:
