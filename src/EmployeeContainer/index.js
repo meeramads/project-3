@@ -128,12 +128,35 @@ class EmployeeContainer extends Component {
         }
     }
 
+    deleteEmployee = async (id) => {
+        console.log(id, ' delete employee ID');
+
+        try{
+            const deleteEmployee = await fetch('http://localhost:9000/api/v1/employee/' + id, {
+                method: 'DELETE'
+            });
+
+            if(deleteEmployee.status !== 200){
+                throw Error('Error with delete');
+            }
+
+            const deleteEmployeeJson = await deleteEmployee.json();
+
+            this.setState({
+                employees: this.state.employees.filter((employee) => employee._id !== id)
+            });
+        } catch (err){
+            console.log(err);
+            return err;
+        }
+    }
+
     render(){
         console.log(this.state)
         return (
             <div>
                 <CreateEmployee addEmployee={this.addEmployee}/>
-                <EmployeeList employees={this.state.employees} showModal={this.showModal}/>
+                <EmployeeList employees={this.state.employees} showModal={this.showModal} deleteEmployee={this.deleteEmployee}/>
                 {this.state.showEditModal ? <EditEmployee closeAndEdit={this.state.closeAndEdit} employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
             </div>
         )
