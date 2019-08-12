@@ -28,7 +28,7 @@ class EmployeeContainer extends Component {
         console.log(employee, e, ' inside of addEmployee');
         
         try{
-            const createEmployee = await fetch('http://localhost/9000/api/v1/employee', {
+            const createEmployee = await fetch('http://localhost:9000/api/v1/employee', {
                 method: 'POST',
                 body: JSON.stringify(employee),
                 headers: {
