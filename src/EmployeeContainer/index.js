@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CreateEmploye from '../CreateEmployee'
 
 class EmployeeContainer extends Component {
     constructor(){
@@ -35,7 +36,7 @@ class EmployeeContainer extends Component {
     render(){
         return (
             <div>
-                EmployeeContainer
+                <CreateEmploye/>
             </div>
         )
     }

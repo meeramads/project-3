@@ -14,35 +14,35 @@ class CreateEmployee extends Component {
     }
 
     updateEmployee = (e) => {
-
+        this.setState({[e.currentTarget.name] : e.currentTarget.value})
     }
 
     render(){
         return (
             <form>
-                <label htmlFor="">Name:
+                <label htmlFor="name">Name:
                     <input type="text" name="name" onChange={this.updateEmployee} value={this.state.name}/>
                 </label>
 
-                <label htmlFor="">Position:
+                <label htmlFor="position">Position:
                     <input type="text" name="position" onChange={this.updateEmployee} value={this.state.position}/>
                 </label>
 
-                <label htmlFor="">Birthdate:
+                <label htmlFor="birthDate">Birthdate:
                     <input type="date" name="birthdate" onChange={this.updateEmployee}  value={this.state.birthDate}/>
                 </label>
 
-                <label htmlFor="">Department:
+                <label htmlFor="department">Department:
                     <input type="text" name="department" onChange={this.updateEmployee}  value={this.state.department}/>
                 </label>
 
-                <label htmlFor="">Annual Salary:
+                <label htmlFor="annualSalary">Annual Salary:
                     <input type="text" name="annualSalary" onChange={this.updateEmployee}  value={this.state.annualSalary}/>
                 </label>
                 
-                <Button type ='submit'>
+                <button type ='submit'>
                     Create Employee
-                </Button>
+                </button>
             </form>
         )
     }
