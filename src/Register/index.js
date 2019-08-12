@@ -35,5 +35,22 @@ class Register extends Component {
             this.props.history.push('/employees');
         }
     }
+    render(){
+        return (
+            <form>
+                <label>
+                    Username:
+                    <input type="text" name="username" onChange={this.handleChange} />
+                </label>
+                <label>
+                    Password:
+                    <input type="password" name="password" onChange={this.handleChange} />
+                </label>
+                <button type='submit'>
+                    Register
+                </button>
+            </form>
+        )
+    }
 }
 export default Register;
