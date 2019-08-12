@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
-import CreateEmployee from '../CreateEmployee'
+import CreateEmployee from '../CreateEmployee';
+import EmployeeList from '../EmployeeList';
+import EditEmployee from '../EditEmployee';
 
 class EmployeeContainer extends Component {
     constructor(){
         super();
         this.state = {
-            employees: []
+            employees: [],
+            showEditModal: false,
+            employeeToEdit: {
+                _id: null,
+                name: '',
+                position: '',
+                department: '',
+                annualSalary: ''
+            }
         }
     }
     
@@ -63,11 +73,25 @@ class EmployeeContainer extends Component {
         }
     }
 
+    handleFormChange = () => {
+
+    }
+
+    showModal = (employee) => {
+        console.log(employee, ' employeeID in show Modal');
+        this.setState({
+            employeeToEdit: employee,
+            showEditModal: !this.state.showEditModal
+        })
+    }
+
     render(){
         console.log(this.state)
         return (
             <div>
                 <CreateEmployee addEmployee={this.addEmployee}/>
+                <EmployeeList employees={this.state.employees} showModal={this.showModal}/>
+                {this.state.showEditModal ? <EditEmployee employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
             </div>
         )
     }
