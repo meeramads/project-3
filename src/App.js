@@ -9,8 +9,8 @@ function App() {
   return (
     <main>
       <Switch>
-        <Route exact path='/' component = { Register }/>
-        <Route exact path='/employees' component ={ EmployeeContainer } />
+        <Route exact path='/register' component = { Register }/>
+        <Route exact path='/' component ={ EmployeeContainer } />
       </Switch>
     </main>
   );

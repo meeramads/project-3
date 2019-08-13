@@ -94,7 +94,7 @@ class EmployeeContainer extends Component {
         e.preventDefault();
         
         try{
-            const editRequest = await fetch('http://localhost/9000/api/v1/employee/' + this.state.employeeToEdit._id, {
+            const editRequest = await fetch('http://localhost:9000/api/v1/employee/' + this.state.employeeToEdit._id, {
                 method: 'PUT',
                 body: JSON.stringify(this.state.employeeToEdit),
                 headers:{
@@ -157,7 +157,7 @@ class EmployeeContainer extends Component {
             <div>
                 <CreateEmployee addEmployee={this.addEmployee}/>
                 <EmployeeList employees={this.state.employees} showModal={this.showModal} deleteEmployee={this.deleteEmployee}/>
-                {this.state.showEditModal ? <EditEmployee closeAndEdit={this.state.closeAndEdit} employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
+                {this.state.showEditModal ? <EditEmployee closeAndEdit={this.closeAndEdit} employeeToEdit={this.state.employeeToEdit} handleFormChange={this.handleFormChange}/> : null}
             </div>
         )
     }
