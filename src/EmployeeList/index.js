@@ -9,6 +9,7 @@ const Employees = (props) => {
                 <span>{employee.name}</span><br/>
                 <span>{employee.position}</span><br/>
                 <span>{employee.department}</span><br/>
+                <span>{employee.annualSalary}</span><br/>
                 <button onClick={props.deleteEmployee.bind(null, employee._id)}>Delete</button>
                 <button onClick={props.showModal.bind(null, employee)}>Edit</button>
             </li>
